@@ -1,0 +1,23 @@
+{
+  "name": "coraline-dad-meme-generator",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "mkdir -p dist/render/data && cp -r render/data/* dist/render/data",
+    "watch": "tsc -w",
+    "prestart": "yarn build",
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "@giancarl021/locate": "^0.1.6",
+    "parse-multipart-data": "^1.5.0"
+  },
+  "devDependencies": {
+    "@azure/functions": "^3.0.0",
+    "@types/gm": "^1.18.12",
+    "@types/node": "16.x",
+    "typescript": "^4.0.0"
+  }
+}
