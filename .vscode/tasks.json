@@ -11,14 +11,14 @@
 		{
 			"type": "shell",
 			"label": "npm build (functions)",
-			"command": "npm run build",
+			"command": "yarn build",
 			"dependsOn": "npm install (functions)",
 			"problemMatcher": "$tsc"
 		},
 		{
 			"type": "shell",
 			"label": "npm install (functions)",
-			"command": "npm install"
+			"command": "yarn"
 		},
 		{
 			"type": "shell",

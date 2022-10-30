@@ -49,8 +49,8 @@ const httpTrigger: AzureFunction = async function (
 
   await writeFile(imagePath, imageBuffer);
 
-  const convert = locate(`${__dirname}/data/imageMagick/convert`);
-  const identify = locate(`${__dirname}/data/imageMagick/identify`);
+  const convert = locate(`/usr/bin/convert`);
+  const identify = locate(`/usr/bin/identify`);
 
   const baseImg = locate(`${__dirname}/data/img/coraline-dad.png`);
   const resultImg = tmp.create('png');

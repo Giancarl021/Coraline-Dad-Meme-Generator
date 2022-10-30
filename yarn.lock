@@ -9,7 +9,7 @@
 
 "@giancarl021/locate@^0.1.6":
   version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@giancarl021/locate/-/locate-0.1.6.tgz#40ecdb894f0ebd04d9c82241def0392b3e3ec550"
+  resolved "https://registry.npmjs.org/@giancarl021/locate/-/locate-0.1.6.tgz"
   integrity sha512-Y4r9I2A2oPnfLBk002sKynInGxyP9J/v26bu71HfDMAX2D9ZBtQ6jnnqdprsGPiMyCuv5RqIL7ypysWLhg6caw==
 
 "@types/gm@^1.18.12":
@@ -31,7 +31,7 @@
 
 parse-multipart-data@^1.5.0:
   version "1.5.0"
-  resolved "https://registry.yarnpkg.com/parse-multipart-data/-/parse-multipart-data-1.5.0.tgz#ab894cc6c40229d0a2042500e120df7562d94b87"
+  resolved "https://registry.npmjs.org/parse-multipart-data/-/parse-multipart-data-1.5.0.tgz"
   integrity sha512-ck5zaMF0ydjGfejNMnlo5YU2oJ+pT+80Jb1y4ybanT27j+zbVP/jkYmCrUGsEln0Ox/hZmuvgy8Ra7AxbXP2Mw==
 
 typescript@^4.0.0:
