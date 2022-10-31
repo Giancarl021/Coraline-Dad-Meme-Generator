@@ -11,7 +11,7 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
-RUN yarn build
+RUN yarn build:local
 
 FROM mcr.microsoft.com/azure-functions/node:4-node16 as production
 

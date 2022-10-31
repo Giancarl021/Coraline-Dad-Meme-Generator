@@ -1,14 +1,16 @@
 {
   "name": "coraline-dad-meme-generator",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.1",
+  "license": "MIT",
+  "description": "Coraline dad tired meme generator azure function",
   "scripts": {
-    "build": "tsc",
-    "postbuild": "mkdir -p dist/render/data && cp -r render/data/* dist/render/data",
-    "watch": "tsc -w",
-    "prestart": "yarn build",
-    "start": "func start",
-    "test": "echo \"No tests yet...\""
+    "build:local": "tsc",
+    "postbuild:local": "mkdir -p dist/render/data && cp -r render/data/* dist/render/data",
+    "prestart:local": "yarn build:local",
+    "start:local": "func start",
+    "build:docker": "docker build -t giancarl021/coraline-dad-meme-generator-azure-function:${npm_package_version} -t giancarl021/coraline-dad-meme-generator-azure-function:latest .",
+    "start:docker": "docker run -p 7071:80 --rm giancarl021/coraline-dad-meme-generator-azure-function:${npm_package_version}",
+    "deploy:docker": "docker push --all-tags giancarl021/coraline-dad-meme-generator-azure-function"
   },
   "dependencies": {
     "@giancarl021/locate": "^0.1.6",

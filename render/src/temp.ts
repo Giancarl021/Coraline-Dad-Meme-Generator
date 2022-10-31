@@ -17,6 +17,7 @@ export default function () {
 
     async function clear() {
         await Promise.all(files.map(file => unlink(file)));
+        files.length = 0;
     }
 
     return {
