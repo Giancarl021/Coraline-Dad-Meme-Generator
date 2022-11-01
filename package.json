@@ -18,7 +18,6 @@
   },
   "devDependencies": {
     "@azure/functions": "^3.0.0",
-    "@types/gm": "^1.18.12",
     "@types/node": "16.x",
     "typescript": "^4.0.0"
   }

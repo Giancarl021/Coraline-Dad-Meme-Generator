@@ -12,18 +12,6 @@
   resolved "https://registry.npmjs.org/@giancarl021/locate/-/locate-0.1.6.tgz"
   integrity sha512-Y4r9I2A2oPnfLBk002sKynInGxyP9J/v26bu71HfDMAX2D9ZBtQ6jnnqdprsGPiMyCuv5RqIL7ypysWLhg6caw==
 
-"@types/gm@^1.18.12":
-  version "1.18.12"
-  resolved "https://registry.yarnpkg.com/@types/gm/-/gm-1.18.12.tgz#67136d2a29a96fc9555b804c2d28e9b83d7c6223"
-  integrity sha512-k3Gd15Ywy75FiFQUsrqpKD42rhMdHaETyw2zjK9u3xbrH1c7nS+npSb19yjPCqR8KxeL7vw2zJF4Kl2bAca0aQ==
-  dependencies:
-    "@types/node" "*"
-
-"@types/node@*":
-  version "18.11.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.7.tgz#8ccef136f240770c1379d50100796a6952f01f94"
-  integrity sha512-LhFTglglr63mNXUSRYD8A+ZAIu5sFqNJ4Y2fPuY7UlrySJH87rRRlhtVmMHplmfk5WkoJGmDjE9oiTfyX94CpQ==
-
 "@types/node@16.x":
   version "16.18.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.2.tgz#77878acc68c5f6241454008beedd39513bd8e851"
