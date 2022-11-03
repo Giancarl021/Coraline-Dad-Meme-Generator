@@ -6,7 +6,7 @@ Coraline Dad tired meme generator [Containerized Azure Function](https://learn.m
 
 ## Pulling from Docker Hub
 
-The image is available on Docker Hub as [microsoft/azure-functions-coraline-dad](https://hub.docker.com/r/microsoft/azure-functions-coraline-dad).
+The image is available on Docker Hub as [giancarl021/coraline-dad-meme-generator-azure-function](https://hub.docker.com/r/giancarl021/coraline-dad-meme-generator-azure-function).
 
 To run this container the following command can be used:
 
