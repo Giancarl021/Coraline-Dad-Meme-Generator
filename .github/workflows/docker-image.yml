@@ -5,16 +5,50 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
-
+  auth:
     runs-on: ubuntu-latest
-
+    
+  build:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Get the solution version
+    - name: Checkout file
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
+        
+    - name: Get solution version
       id: set_ver
       run: |
         SLN_VERSION=$(cat package.json | jq .version)
+        
         echo "::set-output name=version::$SLN_VERSION"
+
+    - name: Get version change
+      id: ver_change
+      run: |
+        PREV_VERSION=$(git show HEAD~1:package.json | jq .version)
+        CURR_VERSION=${{steps.set_ver.outputs.version}}
+        
+        if [[ $PREV_VERSION == $CURR_VERSION ]]
+        then
+          VERSION_CHANGED=false
+        else
+          VERSION_CHANGED=true
+        fi
+        
+        echo "::set-output name=version_changed::$VERSION_CHANGED"
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      if: ${{ steps.ver_change.outputs.version_changed }} == 'true'
+      with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PERSONAL_ACCESS_TOKEN }}
+
     - name: Build the Docker image
+      if: ${{ steps.ver_change.outputs.version_changed }} == 'true'
       run: docker build . --file Dockerfile --tag giancarl021/coraline-dad-meme-generator-azure-function:latest --tag giancarl021/coraline-dad-meme-generator-azure-function:${{steps.set_ver.outputs.version}}
+
+    - name: Push docker image to Docker Hub
+      if: ${{ steps.ver_change.outputs.version_changed }} == 'true'
+      run: docker push --all-tags giancarl021/coraline-dad-meme-generator-azure-function
