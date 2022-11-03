@@ -26,4 +26,4 @@ The response will be an `image/png` file with the rendered result.
 
 ## Source-code
 
-The source-code of this project can be found [here](https://github.com/Giancarl021/Coraline-Dad-Meme-Generator).
+The source-code of this project can be found on [this GitHub repository](https://github.com/Giancarl021/Coraline-Dad-Meme-Generator).
