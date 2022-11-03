@@ -1,0 +1,20 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Get the solution version
+      id: set_ver
+      run: |
+        SLN_VERSION=$(cat package.json | jq .version)
+        echo "::set-output name=version::$SLN_VERSION"
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag giancarl021/coraline-dad-meme-generator-azure-function:latest --tag giancarl021/coraline-dad-meme-generator-azure-function:${{steps.set_ver.outputs.version}}
