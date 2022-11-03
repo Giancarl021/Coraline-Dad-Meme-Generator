@@ -41,7 +41,7 @@ jobs:
 
     - name: Get README.docker change
       run: |
-        DIFF=$(git diff --name-only HEAD~1 HEAD | grep README.docker.md)
+        DIFF=$(echo 'none' | grep README.docker.md)
         README_DOCKER_CHANGED=false
 
         if ! [[ -z $DIFF ]]
