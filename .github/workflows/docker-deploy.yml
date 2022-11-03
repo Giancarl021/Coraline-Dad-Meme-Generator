@@ -73,7 +73,7 @@ jobs:
         if: ${{ env.README_DOCKER_CHANGED == 'true' }}
         uses: peter-evans/dockerhub-description@v3.1.1
         with:
-          username: $DOCKER_USERNAME
+          username: ${{ env.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PERSONAL_ACCESS_TOKEN }}
           repository: "$DOCKER_USERNAME/coraline-dad-meme-generator-azure-function"
           readme-filepath: ./README.docker.md
