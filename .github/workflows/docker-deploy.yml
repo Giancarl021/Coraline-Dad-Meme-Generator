@@ -17,7 +17,7 @@ jobs:
 
       - name: Get solution version
         run: |
-          SLN_VERSION=$(cat package.json | jq .version)
+          SLN_VERSION=$(cat package.json | jq .version | awk '{ print substr($0, 2, length($0)-2) }')
 
           echo "version=$SLN_VERSION"
 
@@ -25,7 +25,7 @@ jobs:
 
       - name: Get version change
         run: |
-          PREV_VERSION=$(git show HEAD~1:package.json | jq .version)
+          PREV_VERSION=$(git show HEAD~1:package.json | jq .version | awk '{ print substr($0, 2, length($0)-2) }')
           VERSION_CHANGED=false
 
           if [[ "$PREV_VERSION" != "$SLN_VERSION" ]]
