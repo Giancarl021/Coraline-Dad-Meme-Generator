@@ -6,13 +6,12 @@ import { execSync as exec } from 'child_process';
 
 import Temp from './src/temp';
 
-const tmp = Temp();
-
 const httpTrigger: AzureFunction = async function (
   context: Context,
   req: HttpRequest
 ): Promise<void> {
   const now = new Date();
+  const tmp = Temp();
 
   console.log(`Request received at ${now.toISOString()}`);
 
