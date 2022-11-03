@@ -41,6 +41,8 @@ jobs:
         echo "prev=$PREV_VERSION"
         echo "changed=$VERSION_CHANGED"
 
+        echo $GITHUB_ENV
+
         echo "{VERSION_CHANGED}={$VERSION_CHANGED}" >> $GITHUB_ENV
 
     - name: Login to Docker Hub
