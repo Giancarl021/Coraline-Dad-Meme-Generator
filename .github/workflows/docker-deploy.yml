@@ -2,7 +2,7 @@ name: Docker Build and Push
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
@@ -10,69 +10,69 @@ jobs:
       DOCKER_USERNAME: giancarl021
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout file
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 2
-        
-    - name: Get solution version
-      run: |
-        SLN_VERSION=$(cat package.json | jq .version)
+      - name: Checkout file
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
-        echo "version=$SLN_VERSION"
-    
-        echo "SLN_VERSION=$SLN_VERSION" >> $GITHUB_ENV
+      - name: Get solution version
+        run: |
+          SLN_VERSION=$(cat package.json | jq .version)
 
-    - name: Get version change
-      run: |
-        PREV_VERSION=$(git show HEAD~1:package.json | jq .version)
-        VERSION_CHANGED=false
-        
-        if [[ "$PREV_VERSION" != "$SLN_VERSION" ]]
-        then
-          VERSION_CHANGED=true
-        fi
+          echo "version=$SLN_VERSION"
 
-        echo "curr=$SLN_VERSION"
-        echo "prev=$PREV_VERSION"
-        echo "changed=$VERSION_CHANGED"
+          echo "SLN_VERSION=$SLN_VERSION" >> $GITHUB_ENV
 
-        echo "VERSION_CHANGED=$VERSION_CHANGED" >> $GITHUB_ENV
+      - name: Get version change
+        run: |
+          PREV_VERSION=$(git show HEAD~1:package.json | jq .version)
+          VERSION_CHANGED=false
 
-    - name: Get README.docker change
-      run: |
-        DIFF=$(echo 'none' | grep README.docker.md)
-        README_DOCKER_CHANGED=false
+          if [[ "$PREV_VERSION" != "$SLN_VERSION" ]]
+          then
+            VERSION_CHANGED=true
+          fi
 
-        if ! [[ -z $DIFF ]]
-        then
-          README_DOCKER_CHANGED=true
-        fi
+          echo "curr=$SLN_VERSION"
+          echo "prev=$PREV_VERSION"
+          echo "changed=$VERSION_CHANGED"
 
-        echo "readme_docker_changed=$README_DOCKER_CHANGED"
+          echo "VERSION_CHANGED=$VERSION_CHANGED" >> $GITHUB_ENV
 
-        echo "README_DOCKER_CHANGED=$README_DOCKER_CHANGED" >> $GITHUB_ENV
+      - name: Get README.docker change
+        run: |
+          DIFF=
+          README_DOCKER_CHANGED=false
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v2
-      if: ${{ env.VERSION_CHANGED == 'true' }}
-      with:
+          if ! [[ -z $DIFF ]]
+          then
+            README_DOCKER_CHANGED=true
+          fi
+
+          echo "readme_docker_changed=$README_DOCKER_CHANGED"
+
+          echo "README_DOCKER_CHANGED=$README_DOCKER_CHANGED" >> $GITHUB_ENV
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        if: ${{ env.VERSION_CHANGED == 'true' }}
+        with:
           username: $DOCKER_USERNAME
           password: ${{ secrets.DOCKER_PERSONAL_ACCESS_TOKEN }}
 
-    - name: Build the Docker image
-      if: ${{ env.VERSION_CHANGED == 'true' }}
-      run: docker build . --file Dockerfile --tag $DOCKER_USERNAME/coraline-dad-meme-generator-azure-function:latest --tag $DOCKER_USERNAME/coraline-dad-meme-generator-azure-function:$SLN_VERSION
+      - name: Build the Docker image
+        if: ${{ env.VERSION_CHANGED == 'true' }}
+        run: docker build . --file Dockerfile --tag $DOCKER_USERNAME/coraline-dad-meme-generator-azure-function:latest --tag $DOCKER_USERNAME/coraline-dad-meme-generator-azure-function:$SLN_VERSION
 
-    - name: Push docker image to Docker Hub
-      if: ${{ env.VERSION_CHANGED == 'true' }}
-      run: docker push --all-tags $DOCKER_USERNAME/coraline-dad-meme-generator-azure-function
-      
-    - name: Docker Hub Description
-      if: ${{ env.README_DOCKER_CHANGED == 'true' }}
-      uses: peter-evans/dockerhub-description@v3.1.1
-      with:
-        username: $DOCKER_USERNAME
-        password: ${{ secrets.DOCKER_PERSONAL_ACCESS_TOKEN }}
-        repository: "$DOCKER_USERNAME/coraline-dad-meme-generator-azure-function"
-        readme-filepath: ./README.docker.md
+      - name: Push docker image to Docker Hub
+        if: ${{ env.VERSION_CHANGED == 'true' }}
+        run: docker push --all-tags $DOCKER_USERNAME/coraline-dad-meme-generator-azure-function
+
+      - name: Docker Hub Description
+        if: ${{ env.README_DOCKER_CHANGED == 'true' }}
+        uses: peter-evans/dockerhub-description@v3.1.1
+        with:
+          username: $DOCKER_USERNAME
+          password: ${{ secrets.DOCKER_PERSONAL_ACCESS_TOKEN }}
+          repository: "$DOCKER_USERNAME/coraline-dad-meme-generator-azure-function"
+          readme-filepath: ./README.docker.md
