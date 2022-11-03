@@ -26,15 +26,16 @@ jobs:
       id: ver_change
       run: |
         PREV_VERSION=$(git show HEAD~1:package.json | jq .version)
+        CURR_VERSION=${{ env.SLN_VERSION }}
         VERSION_CHANGE=false
         
-        if [[ "$PREV_VERSION" != "$SLN_VERSION" ]]
+        if [[ "$PREV_VERSION" != "$CURR_VERSION" ]]
         then
           VERSION_CHANGED=true
         fi
 
-        echo "curr=$PREV_VERSION"
-        echo "prev=$SLN_VERSION"
+        echo "curr=$CURR_VERSION"
+        echo "prev=$PREV_VERSION"
         echo "changed=$VERSION_CHANGED"
 
         echo "{VERSION_CHANGED}={$VERSION_CHANGED}" >> $GITHUB_ENV
