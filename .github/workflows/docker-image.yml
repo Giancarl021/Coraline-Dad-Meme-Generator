@@ -4,10 +4,7 @@ on:
   push:
     branches: [ "master" ]
 
-jobs:
-  auth:
-    runs-on: ubuntu-latest
-    
+jobs:    
   build:
     runs-on: ubuntu-latest
     steps:
