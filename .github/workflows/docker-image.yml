@@ -26,9 +26,10 @@ jobs:
 
     - name: Get version change
       id: ver_change
+      env:
+        CURR_VERSION: ${{ env.SLN_VERSION }}
       run: |
         PREV_VERSION=$(git show HEAD~1:package.json | jq .version)
-        CURR_VERSION=${{ env.SLN_VERSION }}
         VERSION_CHANGE=false
         
         if [[ "$PREV_VERSION" != "$CURR_VERSION" ]]
