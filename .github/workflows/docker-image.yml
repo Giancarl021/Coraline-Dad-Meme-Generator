@@ -28,11 +28,11 @@ jobs:
       id: ver_change
       run: |
         PREV_VERSION=$(git show HEAD~1:package.json | jq .version)
-        VERSION_CHANGE="false"
+        VERSION_CHANGE="no"
         
         if [[ "$PREV_VERSION" != "$SLN_VERSION" ]]
         then
-          VERSION_CHANGED="true"
+          VERSION_CHANGED="yes"
         fi
 
         echo "curr=$SLN_VERSION"
@@ -43,15 +43,15 @@ jobs:
 
     - name: Login to Docker Hub
       uses: docker/login-action@v2
-      if: ${{ env.VERSION_CHANGED == 'true' }}
+      if: ${{ env.VERSION_CHANGED == 'yes' }}
       with:
           username: $DOCKER_USERNAME
           password: ${{ secrets.DOCKER_PERSONAL_ACCESS_TOKEN }}
 
     - name: Build the Docker image
-      if: ${{ env.VERSION_CHANGED == 'true' }}
+      if: ${{ env.VERSION_CHANGED == 'yes' }}
       run: docker build . --file Dockerfile --tag $DOCKER_USERNAME/coraline-dad-meme-generator-azure-function:latest --tag $DOCKER_USERNAME/coraline-dad-meme-generator-azure-function:$SLN_VERSION
 
     - name: Push docker image to Docker Hub
-      if: ${{ env.VERSION_CHANGED == 'true' }}
+      if: ${{ env.VERSION_CHANGED == 'yes' }}
       run: docker push --all-tags $DOCKER_USERNAME/coraline-dad-meme-generator-azure-function
