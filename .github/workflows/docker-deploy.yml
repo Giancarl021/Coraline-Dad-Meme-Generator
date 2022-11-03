@@ -41,8 +41,11 @@ jobs:
 
       - name: Get README.docker change
         run: |
-          DIFF=
+          DIFF=$(git diff --name-only HEAD~1 HEAD)
           README_DOCKER_CHANGED=false
+
+          echo "diff=$DIFF"
+          exit 0
 
           if ! [[ -z $DIFF ]]
           then
