@@ -26,15 +26,14 @@ jobs:
       id: ver_change
       run: |
         PREV_VERSION=$(git show HEAD~1:package.json | jq .version)
+        VERSION_CHANGE=false
         
-        if [[ $PREV_VERSION == $SLN_VERSION ]]
+        if [[ "$PREV_VERSION" != "$SLN_VERSION" ]]
         then
-          VERSION_CHANGED=false
-        else
           VERSION_CHANGED=true
         fi
 
-        echo "curr=$CURRENT_VERSION"
+        echo "curr=$PREV_VERSION"
         echo "prev=$SLN_VERSION"
         echo "changed=$VERSION_CHANGED"
 
